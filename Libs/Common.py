@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 import hashlib
+import subprocess
+import sys
+
+
+def os_popen(cmd):
+    print
+    var = "cmd", cmd
+    np = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    while np.poll() is None:
+        ret = np.stdout.readline()[:-1]
+        if ret != "":
+            print ret
+    if np.poll():
+        print "cmd error:", cmd
+        sys.exit(1)
 
 
 def _md5(data):
@@ -7,12 +22,11 @@ def _md5(data):
     return md5
 
 
-def md5_file(filePath):
-    path = filePath.replace("\\", "/")
+def md5_file(filepath):
+    path = filepath.replace("\\", "/")
     print(path)
     with open(path, "rb") as f_read:
         buff = f_read.read()
-        # print(buff)
         if len(buff) > 0:
             md5 = _md5(buff)
             return md5

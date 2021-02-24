@@ -3,22 +3,8 @@ import subprocess
 import sys
 
 path = "F:\\work\\slots"
-
 zip_name = "111"
 max_len = 2
-
-
-def os_popen(cmd):
-    print
-    var = "cmd", cmd
-    np = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-    while np.poll() is None:
-        ret = np.stdout.readline()[:-1]
-        if ret != "":
-            print ret
-    if np.poll():
-        print "cmd error:", cmd
-        sys.exit(1)
 
 
 def main():

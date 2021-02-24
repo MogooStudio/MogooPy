@@ -12,21 +12,19 @@ def _decrypt(data, key):
     return buff
 
 
-def encrypt_file(filePath, key):
-    path = filePath.replace("\\", "/")
+def encrypt_file(filepath, key):
+    path = filepath.replace("\\", "/")
     with open(path, "rb") as f_read:
         buff = f_read.read()
-        # print(buff)
         buff = _ecrypt(buff, key)
         print(buff)
         return buff
 
 
-def decrypt_file(filePath, key):
-    path = filePath.replace("\\", "/")
+def decrypt_file(filepath, key):
+    path = filepath.replace("\\", "/")
     with open(path, "rb") as f_read:
         buff = f_read.read()
-        # print(buff)
         buff = _decrypt(buff, key)
         print(buff)
         return buff
