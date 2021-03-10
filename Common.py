@@ -7,25 +7,25 @@ G_ZIP_SPLIT_LINE = 500
 G_ZIP_SPLIT_UNIT = 100
 
 
-def os_popen(_cmd):
-    print "cmd", _cmd
-    np = subprocess.Popen(_cmd, shell=True, stdout=subprocess.PIPE)
+def os_popen(cmd):
+    print "cmd", cmd
+    np = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     while np.poll() is None:
         ret = np.stdout.readline()[:-1]
         if ret != "":
             print ret
     if np.poll():
-        print "cmd error:", _cmd
+        print "cmd error:", cmd
         sys.exit(1)
 
 
-def _md5(_data):
-    md5 = hashlib.md5(_data).hexdigest()
+def _md5(data):
+    md5 = hashlib.md5(data).hexdigest()
     return md5
 
 
-def md5_file(_filepath):
-    path = _filepath.replace("\\", "/")
+def md5_file(filepath):
+    path = filepath.replace("\\", "/")
     print(path)
     with open(path, "rb") as f_read:
         buff = f_read.read()
@@ -36,17 +36,17 @@ def md5_file(_filepath):
             return ""
 
 
-def zip_files(_zip_name, _zip_filepath):
-    if not isinstance(_zip_filepath, list):
+def zip_files(name, filepath):
+    if not isinstance(filepath, list):
         return
-    z_len = len(_zip_filepath)
-    if z_len <= 0:
+    zip_len = len(filepath)
+    if zip_len <= 0:
         return
-    if z_len <= G_ZIP_SPLIT_LINE:
-        cmd = "zip -r %s ./ -i %s" % (_zip_name, " -i ".join(_zip_filepath))
+    if zip_len <= G_ZIP_SPLIT_LINE:
+        cmd = "zip -r %s ./ -i %s" % (name, " -i ".join(filepath))
         os_popen(cmd)
     else:
-        while z_len > 0:
-            cmd = "zip -r %s ./ -i %s" % (_zip_name, " -i ".join(_zip_filepath[0:G_ZIP_SPLIT_UNIT]))
+        while zip_len > 0:
+            cmd = "zip -r %s ./ -i %s" % (name, " -i ".join(filepath[0:G_ZIP_SPLIT_UNIT]))
             os_popen(cmd)
-            _zip_filepath = _zip_filepath[G_ZIP_SPLIT_UNIT:]
+            filepath = filepath[G_ZIP_SPLIT_UNIT:]

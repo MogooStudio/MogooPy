@@ -13,7 +13,7 @@ def string_end_swith(str, suffix):
     return False
 
 
-def get_all_files(dirpath, _extnames="", _mtimescope=[]):
+def get_all_files(dirpath, _extnames="", mtimescope=[]):
     files = os.listdir(dirpath)
     result = []
     extnames = []
@@ -22,12 +22,12 @@ def get_all_files(dirpath, _extnames="", _mtimescope=[]):
     else:
         extnames = _extnames.split("|")
 
-    bValidModifyTimeScope = len(_mtimescope) == 2
+    bValidModifyTimeScope = len(mtimescope) == 2
     mtime_min = 0
     mtime_max = 0
     if bValidModifyTimeScope:
-        mtime_min = _mtimescope[0]
-        mtime_max = _mtimescope[1]
+        mtime_min = mtimescope[0]
+        mtime_max = mtimescope[1]
 
     for file in files:
         filepath = dirpath + "/" + file
@@ -40,7 +40,7 @@ def get_all_files(dirpath, _extnames="", _mtimescope=[]):
                 else:
                     result.append(filepath)
         else:
-            tmp = get_all_files(filepath, extnames, _mtimescope)
+            tmp = get_all_files(filepath, extnames, mtimescope)
             result.extend(tmp)
     return result
 
