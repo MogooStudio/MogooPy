@@ -1,7 +1,4 @@
 import os
-import Common
-import FileUtils
-import Encrypt
 
 
 def main():

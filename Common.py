@@ -3,8 +3,8 @@ import hashlib
 import subprocess
 import sys
 
-zip_split_len = 500
-zip_max_len = 100
+G_ZIP_SPLIT_LINE = 500
+G_ZIP_SPLIT_UNIT = 100
 
 
 def os_popen(_cmd):
@@ -39,14 +39,14 @@ def md5_file(_filepath):
 def zip_files(_zip_name, _zip_filepath):
     if not isinstance(_zip_filepath, list):
         return
-    _len = len(_zip_filepath)
-    if _len <= 0:
+    z_len = len(_zip_filepath)
+    if z_len <= 0:
         return
-    if _len <= zip_split_len:
+    if z_len <= G_ZIP_SPLIT_LINE:
         cmd = "zip -r %s ./ -i %s" % (_zip_name, " -i ".join(_zip_filepath))
         os_popen(cmd)
     else:
-        while _len > 0:
-            cmd = "zip -r %s ./ -i %s" % (_zip_name, " -i ".join(_zip_filepath[0:zip_max_len]))
+        while z_len > 0:
+            cmd = "zip -r %s ./ -i %s" % (_zip_name, " -i ".join(_zip_filepath[0:G_ZIP_SPLIT_UNIT]))
             os_popen(cmd)
-            _zip_filepath = _zip_filepath[zip_max_len:]
+            _zip_filepath = _zip_filepath[G_ZIP_SPLIT_UNIT:]

@@ -3,7 +3,7 @@ import os
 import logging
 
 
-def StringEndswith(str, suffix):
+def string_end_swith(str, suffix):
     if isinstance(suffix, list):
         for tmp in suffix:
             if str.endswith(tmp):
@@ -13,7 +13,7 @@ def StringEndswith(str, suffix):
     return False
 
 
-def GetAllFiles(dirpath, _extnames="", _mtimescope=[]):
+def get_all_files(dirpath, _extnames="", _mtimescope=[]):
     files = os.listdir(dirpath)
     result = []
     extnames = []
@@ -32,20 +32,20 @@ def GetAllFiles(dirpath, _extnames="", _mtimescope=[]):
     for file in files:
         filepath = dirpath + "/" + file
         if not os.path.isdir(filepath):
-            if StringEndswith(filepath, extnames):
+            if string_end_swith(filepath, extnames):
                 if bValidModifyTimeScope:
                     st = os.stat(filepath)
-                    if st.st_mtime >= mtime_min and st.st_mtime <= mtime_max:
+                    if mtime_min <= st.st_mtime <= mtime_max:
                         result.append(filepath)
                 else:
                     result.append(filepath)
         else:
-            tmp = GetAllFiles(filepath, extnames, _mtimescope)
+            tmp = get_all_files(filepath, extnames, _mtimescope)
             result.extend(tmp)
     return result
 
 
-def GetAllLines(filepath):
+def get_all_lines(filepath):
     lines = []
     try:
         f = open(filepath, "r")
@@ -59,7 +59,7 @@ def GetAllLines(filepath):
             f.close()
         except Exception as e:
             f.close()
-            logging.error("GetAllLines: %s", filepath)
+            logging.error("get_all_lines: %s", filepath)
             logging.error(e)
             lines = []
     return lines
