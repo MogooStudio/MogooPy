@@ -1,8 +1,8 @@
 # MogooPy
-
-![JetBrains Toolbox Version](https://img.shields.io/badge/Toolbox-tools-red?style=flat-square)
-![JetBrains Rider Version](https://img.shields.io/badge/PyCharm-v2020.3.3-green?style=flat-square)
-![GitHub](https://img.shields.io/github/license/MogooStudio/Mogoo?style=flat-square)    
-
 python记录
+
+# 感谢 [JetBrains](https://www.jetbrains.com/shop/eform/opensource) 的工具支持
+![jetbrains](https://user-images.githubusercontent.com/3353611/119081825-6b381980-ba2f-11eb-85cc-002b466526ba.png)
+
+
  
