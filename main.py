@@ -1,8 +1,9 @@
 import os
+import core
 
 
 def main():
-    print "test main"
+    print("test main")
 
 
 if __name__ == '__main__':

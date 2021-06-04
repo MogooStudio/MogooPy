@@ -3,26 +3,25 @@ import hashlib
 import subprocess
 import sys
 import os
-import argparse
 
 G_ZIP_SPLIT_LINE = 500
 G_ZIP_SPLIT_UNIT = 100
 
 
 def os_system(cmd, use_secure = False):
-    print "cmd", cmd
+    print("cmd", cmd)
     os.system(cmd)
 
 
 def os_popen(cmd):
-    print "cmd", cmd
+    print("cmd", cmd)
     np = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
     while np.poll() is None:
         ret = np.stdout.readline()[:-1]
         if ret != "":
-            print ret
+            print(ret)
     if np.poll():
-        print "cmd error:", cmd
+        print("cmd error:", cmd)
         sys.exit(1)
 
 
@@ -58,7 +57,7 @@ def zip_dir(name, dirpath):
     assert isinstance(dirpath, str), "error: dirpath={0}".format(dirpath)
     os.chdir(dirpath)
     files = []
-    for name in os.listdir("."):
+    for name in os.listdir(".."):
         files.append(os.path.join(dirpath, name))
     zip_files(name, files)
 
